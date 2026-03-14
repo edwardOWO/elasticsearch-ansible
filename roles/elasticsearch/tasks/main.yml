@@ -1,0 +1,36 @@
+---
+# tasks file for roles/elasticsearch
+
+
+- name: Import Elastic GPG key
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elastic repo
+  copy:
+    dest: /etc/yum.repos.d/elastic.repo
+    content: |
+      [elastic-8.x]
+      name=Elastic repository
+      baseurl=https://artifacts.elastic.co/packages/8.x/yum
+      gpgcheck=1
+      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      enabled=1
+
+- name: Install Elasticsearch
+  yum:
+    name: elasticsearch
+    state: present
+
+- name: Configure Elasticsearch
+  template:
+    src: elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+
+- name: Start Elasticsearch
+  systemd:
+    name: elasticsearch
+    state: started
+    enabled: yes
+

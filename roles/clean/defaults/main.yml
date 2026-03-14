@@ -1,0 +1,17 @@
+
+elk_packages:
+  - elasticsearch
+  - kibana
+
+elk_dirs:
+  - /etc/elasticsearch
+  - /etc/kibana
+  - /var/lib/elasticsearch
+  - /var/lib/kibana
+  - /var/lib/keystone
+  - /var/log/elasticsearch
+  - /var/log/kibana
+  - /usr/share/elasticsearch
+  - /usr/share/kibana
+
+elk_repo: /etc/yum.repos.d/elastic.repo

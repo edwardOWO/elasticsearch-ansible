@@ -1,0 +1,4 @@
+- hosts: clean
+  become: yes
+  roles:
+    - clean

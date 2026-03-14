@@ -1,0 +1,26 @@
+# tasks file for roles/clean
+- name: Stop Elasticsearch and Kibana services if they exist
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  loop:
+    - elasticsearch
+    - kibana
+  ignore_errors: yes
+
+- name: Remove ELK packages
+  ansible.builtin.yum:
+    name: "{{ elk_packages }}"
+    state: absent
+
+- name: Remove ELK directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ elk_dirs }}"
+
+- name: Remove ELK yum repo
+  ansible.builtin.file:
+    path: "{{ elk_repo }}"
+    state: absent

@@ -1,0 +1,18 @@
+cluster.name: elk-cluster
+
+node.name: {{ inventory_hostname }}
+
+network.host: 0.0.0.0
+
+discovery.seed_hosts:
+{% for host in groups['elasticsearch'] %}
+  - {{ host }}
+{% endfor %}
+
+cluster.initial_master_nodes:
+{% for host in groups['elasticsearch'] %}
+  - {{ host }}
+{% endfor %}
+
+xpack.security.enabled: true
+

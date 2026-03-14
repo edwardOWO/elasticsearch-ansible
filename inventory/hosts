@@ -1,0 +1,11 @@
+[elasticsearch]
+elk1
+
+[kibana]
+elk2
+
+
+[clean]
+elk1
+elk2
+elk3
